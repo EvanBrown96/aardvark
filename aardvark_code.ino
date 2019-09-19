@@ -21,11 +21,11 @@ const float ARDUINO_OUT = 5.0;
 /**
  * resistance value
  */
-const int  R_VOUT_UPPER = 4560;
-const int  R_VOUT_LOWER = 3243;
-const int  R_SC         = 950; // in milli-ohms
-const long R_IOUT_UPPER = 468000L;
-const long R_IOUT_LOWER = 330000L;
+const int  R_VOUT_UPPER = 4630; // 4560;
+const int  R_VOUT_LOWER = 3260; // 3243;
+const int  R_SC         = 1082; // in milli-ohms
+const long R_IOUT_UPPER = 473000L;
+const long R_IOUT_LOWER = 326000L;
 
 /**
  * PWM range definitions
@@ -63,7 +63,7 @@ float getCurrent(){
   float measured = (5 * static_cast<float>(digi_repr)) / 1023;
   float ref_voltage = (measured * (R_IOUT_UPPER + R_IOUT_LOWER)) / R_IOUT_LOWER;
   float actual_voltage = getActualVoltage();
-  float total_current = (ref_voltage - actual_voltage) / R_SC;
+  float total_current = 1000000 * (ref_voltage - actual_voltage) / R_SC;
   return total_current - (1000 * actual_voltage / (R_VOUT_UPPER + R_VOUT_LOWER));
   
 }
